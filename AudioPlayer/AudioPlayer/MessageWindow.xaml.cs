@@ -86,17 +86,17 @@ namespace AudioPlayer
             {
                 case MessageBoxImage.Warning:
                     {
-                        messageBox.SetImage("Warning.png");
+                        messageBox.SetImage("Images/Warning.png");
                         break;
                     }
                 case MessageBoxImage.Information:
                     {
-                        messageBox.SetImage("Information.png");
+                        messageBox.SetImage("Images/Information.png");
                         break;
                     }
                 case MessageBoxImage.Error:
                     {
-                        messageBox.SetImage("Error.png");
+                        messageBox.SetImage("Images/Error.png");
                         break;
                     }
                 default:

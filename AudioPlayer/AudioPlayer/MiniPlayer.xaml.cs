@@ -42,18 +42,6 @@ namespace AudioPlayer
             mw.playing = playing;
             mw.SongsListBox.SelectedIndex = SongsListBox.SelectedIndex;
             mw.isPlaying = isPlaying;
-            if (mw.isPlaying == 0)
-            {
-                mw.IsPlayingLabel.Content = "Stopped";
-            }
-            else if (mw.isPlaying == 1)
-            {
-                mw.IsPlayingLabel.Content = "Paused";
-            }
-            else if (mw.isPlaying == 2)
-            {
-                mw.IsPlayingLabel.Content = "Playing";
-            }
             mw.timer.Interval = timer.Interval;
             mw.timer.Tick += mw.Timer_Tick;
             mw.timer.Start();
@@ -65,34 +53,12 @@ namespace AudioPlayer
             mw.VolumeLabel.Content = VolumeLabel.Content;
             mw.mediaPlayer.Volume = VolumeSlider.Value;
             mw.mediaPlayer.Balance = mediaPlayer.Balance;
-            mw.BalanceSlider.Value = mediaPlayer.Balance;
             mw.PlayPauseButton.Background = PlayPauseButton.Background;
-            mw.StopButton.Background = StopButton.Background;
             mw.RepeatButton.Background = RepeatButton.Background;
             mw.RepeatButton.Content = RepeatButton.Content;
             mw.repeatType = repeatType;
-            if (mw.repeatType == 0)
-            {
-                mw.IsRepeatedLabel.Content = "No Repeat";
-            }
-            else if (mw.repeatType == 1)
-            {
-                mw.IsRepeatedLabel.Content = "Repeat All";
-            }
-            else if (mw.repeatType == 2)
-            {
-                mw.IsRepeatedLabel.Content = "Repeat Single Song";
-            }
             mw.ShuffleButton.Background = ShuffleButton.Background;
             mw.shuffle = shuffle;
-            if (mw.shuffle == 0)
-            {
-                mw.ShuffleLabel.Content = "No Shuffle";
-            }
-            else
-            {
-                mw.ShuffleLabel.Content = "Random Shuffle";
-            }
             try
             {
                 mw.mediaPlayer.Open(new Uri(SongsListBox.Items[playing].ToString()));
@@ -555,7 +521,6 @@ namespace AudioPlayer
                 StreamWriter sw = new StreamWriter("./autoconfig_do_not_delete_or_modify.txt");
                 sw.WriteLine("Audio Player version 1.0. Below is your automatic config. DO NOT DELETE OR MODIFY THIS FILE!");
                 sw.WriteLine(mediaPlayer.Volume);
-                sw.WriteLine(mediaPlayer.Balance);
                 sw.WriteLine(repeatType);
                 sw.WriteLine(shuffle);
                 if (SongsListBox.Items.Count > 0)

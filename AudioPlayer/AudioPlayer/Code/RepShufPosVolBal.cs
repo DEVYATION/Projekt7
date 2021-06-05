@@ -16,20 +16,17 @@ namespace AudioPlayer
             {
                 repeatType = 1;
                 RepeatButton.Background = (Brush)new BrushConverter().ConvertFrom("#FF6BA1FF");
-                IsRepeatedLabel.Content = "Repeat All";
             }
             else if (repeatType == 1)
             {
                 repeatType = 2;
                 RepeatButton.Content = "🔂";
-                IsRepeatedLabel.Content = "Repeat Single Song";
             }
             else
             {
                 repeatType = 0;
                 RepeatButton.Content = "🔁";
                 RepeatButton.Background = (Brush)new BrushConverter().ConvertFrom("#FF9C9C9C");
-                IsRepeatedLabel.Content = "No Repeat";
             }
         }
 
@@ -39,13 +36,11 @@ namespace AudioPlayer
             {
                 shuffle = 1;
                 ShuffleButton.Background = (Brush)new BrushConverter().ConvertFrom("#FF6BA1FF");
-                ShuffleLabel.Content = "Random Shuffle";
             }
             else
             {
                 shuffle = 0;
                 ShuffleButton.Background = (Brush)new BrushConverter().ConvertFrom("#FF9C9C9C");
-                ShuffleLabel.Content = "No Shuffle";
             }
         }
 
@@ -80,17 +75,6 @@ namespace AudioPlayer
         {
             mediaPlayer.Volume = VolumeSlider.Value;
             VolumeLabel.Content = Math.Round(VolumeSlider.Value * 100) + "%";
-        }
-
-        private void BalanceSlider_DragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
-        {
-            mediaPlayer.Balance = BalanceSlider.Value;
-        }
-
-        private void BalanceResetButton_Click(object sender, RoutedEventArgs e)
-        {
-            mediaPlayer.Balance = 0;
-            BalanceSlider.Value = 0;
         }
     }
 }

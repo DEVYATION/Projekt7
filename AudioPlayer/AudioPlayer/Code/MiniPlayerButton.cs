@@ -29,7 +29,6 @@ namespace AudioPlayer
                 mp.mediaPlayer.Volume = VolumeSlider.Value;
                 mp.mediaPlayer.Balance = mediaPlayer.Balance;
                 mp.PlayPauseButton.Background = PlayPauseButton.Background;
-                mp.StopButton.Background = StopButton.Background;
                 mp.RepeatButton.Background = RepeatButton.Background;
                 mp.RepeatButton.Content = RepeatButton.Content;
                 mp.repeatType = repeatType;

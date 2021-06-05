@@ -1,16 +1,5 @@
 Audio Player version 1.0. Below is your automatic config. DO NOT DELETE OR MODIFY THIS FILE!
 1
 0
-2
 0
-1
-C:\Users\Matth\OneDrive\Asztali gép\Recreation\Music\Progressbar95\1. PC Speaker Theme Song, In-Game Version.mp3
-C:\Users\Matth\OneDrive\Asztali gép\Recreation\Music\Progressbar95\2. PC Speaker Theme Song, Original Version.mp3
-C:\Users\Matth\OneDrive\Asztali gép\Recreation\Music\Progressbar95\3. Low Quality MIDI Theme Song.mp3
-C:\Users\Matth\OneDrive\Asztali gép\Recreation\Music\Progressbar95\4. MIDI Theme Song, In-Game Version.mp3
-C:\Users\Matth\OneDrive\Asztali gép\Recreation\Music\Progressbar95\5. MIDI Theme Song, Original Version.mp3
-C:\Users\Matth\OneDrive\Asztali gép\Recreation\Music\Progressbar95\6. Low Quality MP3 Theme Song.mp3
-C:\Users\Matth\OneDrive\Asztali gép\Recreation\Music\Progressbar95\7. MP3 Theme Song, In-Game Version.mp3
-C:\Users\Matth\OneDrive\Asztali gép\Recreation\Music\Progressbar95\8. MP3 Theme Song, Original Version.mp3
-C:\Users\Matth\OneDrive\Asztali gép\Recreation\Music\Progressbar95\9. MP3 Theme Song REMIX, In-Game Version.mp3
-C:\Users\Matth\OneDrive\Asztali gép\Recreation\Music\Progressbar95\10. MP3 Theme Song REMIX, Original Version.mp3
+-1

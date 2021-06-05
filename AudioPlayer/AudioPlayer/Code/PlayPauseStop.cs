@@ -42,14 +42,12 @@ namespace AudioPlayer
                 {
                     mediaPlayer.Play();
                     isPlaying = 2;
-                    IsPlayingLabel.Content = "Playing";
                     PlayPauseButton.Background = (Brush)new BrushConverter().ConvertFrom("#FF82EE76");
                 }
                 else
                 {
                     mediaPlayer.Pause();
                     isPlaying = 1;
-                    IsPlayingLabel.Content = "Paused";
                     PlayPauseButton.Background = (Brush)new BrushConverter().ConvertFrom("#FFC5C511");
                 }
             }
@@ -59,6 +57,7 @@ namespace AudioPlayer
         {
             Stop();
         }
+
         private void Start()
         {
             mediaPlayer.Play();
@@ -67,9 +66,7 @@ namespace AudioPlayer
             timer.Start();
             isPlaying = 2;
             PositionSlider.IsEnabled = true;
-            IsPlayingLabel.Content = "Playing";
             PlayPauseButton.Background = (Brush)new BrushConverter().ConvertFrom("#FF82EE76");
-            StopButton.Background = (Brush)new BrushConverter().ConvertFrom("#FFB91414");
             mediaPlayer.Volume = VolumeSlider.Value;
             mediaPlayer.MediaFailed += Media_Failed;
         }
@@ -84,11 +81,8 @@ namespace AudioPlayer
             PositionSlider.Value = 0;
             PositionSlider.Maximum = 1;
             PositionSlider.IsEnabled = false;
-            BalanceSlider.Value = 0;
             PositionLabel.Content = "00:00/00:00";
-            IsPlayingLabel.Content = "Stopped";
             PlayPauseButton.Background = (Brush)new BrushConverter().ConvertFrom("#FF12B900");
-            StopButton.Background = (Brush)new BrushConverter().ConvertFrom("#FF590000");
         }
     }
 }

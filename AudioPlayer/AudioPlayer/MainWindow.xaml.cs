@@ -18,6 +18,20 @@ namespace AudioPlayer
         public readonly Random r = new Random();
         public int positionSliderIsMoving = 0, isPlaying = 0, playing = -1, repeatType = 0, shuffle = 0, shuffleSelection = 0, shuffleFound = 0, saveSuccess = 0;
 
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+            SongsListBox.Width = SystemParameters.WorkArea.Width - 80;
+            SongsListBox.Height = SystemParameters.WorkArea.Height - 325;
+            ControlsGrid.Width = SystemParameters.WorkArea.Width - 80;
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            SongsListBox.Width = Width - 80;
+            SongsListBox.Height = Height - 325;
+            ControlsGrid.Width = Width - 80;
+        }
+
         class Error : Exception
         {
             public Error()
@@ -40,28 +54,23 @@ namespace AudioPlayer
                 VolumeSlider.Value = Convert.ToDouble(sr.ReadLine());
                 VolumeLabel.Content = Math.Round(VolumeSlider.Value * 100) + "%";
                 mediaPlayer.Volume = VolumeSlider.Value;
-                BalanceSlider.Value = Convert.ToDouble(sr.ReadLine());
-                mediaPlayer.Balance = BalanceSlider.Value;
                 int fileRepeat = Convert.ToInt32(sr.ReadLine());
                 if (fileRepeat == 1)
                 {
                     repeatType = 1;
                     RepeatButton.Background = (Brush)new BrushConverter().ConvertFrom("#FF6BA1FF");
-                    IsRepeatedLabel.Content = "Repeat All";
                 }
                 else if (fileRepeat == 2)
                 {
                     repeatType = 2;
                     RepeatButton.Content = "🔂";
                     RepeatButton.Background = (Brush)new BrushConverter().ConvertFrom("#FF6BA1FF");
-                    IsRepeatedLabel.Content = "Repeat Single Song";
                 }
                 int fileShuffle = Convert.ToInt32(sr.ReadLine());
                 if (fileShuffle == 1)
                 {
                     shuffle = 1;
                     ShuffleButton.Background = (Brush)new BrushConverter().ConvertFrom("#FF6BA1FF");
-                    ShuffleLabel.Content = "Random Shuffle";
                 }
                 int fileSelectedIndex = Convert.ToInt32(sr.ReadLine());
                 while (!sr.EndOfStream)
@@ -91,7 +100,6 @@ namespace AudioPlayer
                 StreamWriter sw = new StreamWriter("./autoconfig_do_not_delete_or_modify.txt");
                 sw.WriteLine("Audio Player version 1.0. Below is your automatic config. DO NOT DELETE OR MODIFY THIS FILE!");
                 sw.WriteLine(mediaPlayer.Volume);
-                sw.WriteLine(mediaPlayer.Balance);
                 sw.WriteLine(repeatType);
                 sw.WriteLine(shuffle);
                 if (SongsListBox.Items.Count > 0)

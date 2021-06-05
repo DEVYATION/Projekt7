@@ -50,7 +50,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>mainIcon.ico</ApplicationIcon>
+    <ApplicationIcon>Images\mainIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -69,13 +73,13 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="Ignorable code\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Code\MiniPlayerButton.cs" />
-    <Compile Include="Code\SelIndFirstIndStAgNextRandSong.cs" />
-    <Compile Include="Code\DoubleClickAddRemoveClear.cs" />
+    <Compile Include="Code\Sel1stIndStAgNxtRanS.cs" />
+    <Compile Include="Code\2ClicAddRemClear.cs" />
     <Compile Include="Code\RepShufPosVolBal.cs" />
     <Compile Include="Code\PrevNext.cs" />
     <Compile Include="Code\PlayPauseStop.cs" />
@@ -86,12 +90,12 @@
       <DependentUpon>MiniPlayer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Code\SaveLoad.cs" />
-    <Compile Include="Code\TimerMediaFailedMediaEnded.cs" />
+    <Compile Include="Code\TimerMediaFailedEnded.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
+    <Compile Include="Ignorable code\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -132,16 +136,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="Ignorable code\App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="infoIcon.png" />
+    <Resource Include="Images\mainIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="mainIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="mainIcon.ico" />
+    <Resource Include="Images\mainIcon.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
@@ -156,14 +157,15 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="note.png" />
+    <Resource Include="Images\note.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Error.png" />
-    <Resource Include="Information.png" />
+    <Resource Include="Images\Error.png" />
+    <Resource Include="Images\Information.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Warning.png" />
+    <Resource Include="Images\Warning.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
