@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
 
@@ -18,18 +19,73 @@ namespace AudioPlayer
         public readonly Random r = new Random();
         public int positionSliderIsMoving = 0, isPlaying = 0, playing = -1, repeatType = 0, shuffle = 0, shuffleSelection = 0, shuffleFound = 0, saveSuccess = 0;
 
-        private void Window_StateChanged(object sender, EventArgs e)
-        {
-            SongsListBox.Width = SystemParameters.WorkArea.Width - 80;
-            SongsListBox.Height = SystemParameters.WorkArea.Height - 325;
-            ControlsGrid.Width = SystemParameters.WorkArea.Width - 80;
-        }
-
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            SongsListBox.Width = Width - 80;
-            SongsListBox.Height = Height - 325;
-            ControlsGrid.Width = Width - 80;
+            if (Width < 500)
+            {
+                CPLabel.Visibility = Visibility.Collapsed;
+                CPGrid.Width = 100;
+                PositionSlider.Width = double.NaN;
+                PositionSlider.HorizontalAlignment = HorizontalAlignment.Stretch;
+                ShuffleButton.Visibility = Visibility.Collapsed;
+                RepeatButton.Visibility = Visibility.Collapsed;
+                MiniPlayerButton.Visibility = Visibility.Collapsed;
+                VolumeControlGrid.Visibility = Visibility.Collapsed;
+                MenuButton.Visibility = Visibility.Visible;
+                ControlsGrid.SetValue(Grid.ColumnSpanProperty, 2);
+                PrevButton.Margin = new Thickness(0, 0, 0, 0);
+                PlayPauseButton.Margin = new Thickness(55, 0, 0, 0);
+                NextButton.Margin = new Thickness(110, 0, 0, 0);
+                MenuButton.Margin = new Thickness(165, 10, 0, 0);
+                MusicControlsGrid.Width = 205;
+                VolumeSlider.Orientation = Orientation.Horizontal;
+            }
+            else if (Width >= 500 && Width < 600)
+            {
+                CPLabel.Visibility = Visibility.Collapsed;
+                CPGrid.Width = 100;
+                PositionSlider.Width = double.NaN;
+                PositionSlider.HorizontalAlignment = HorizontalAlignment.Stretch;
+                ShuffleButton.Visibility = Visibility.Visible;
+                RepeatButton.Visibility = Visibility.Visible;
+                MiniPlayerButton.Visibility = Visibility.Visible;
+                VolumeControlGrid.Visibility = Visibility.Visible;
+                MenuButton.Visibility = Visibility.Hidden;
+                ControlsGrid.SetValue(Grid.ColumnSpanProperty, 1);
+                PrevButton.Margin = new Thickness(55, 0, 0, 0);
+                PlayPauseButton.Margin = new Thickness(110, 0, 0, 0);
+                NextButton.Margin = new Thickness(165, 0, 0, 0);
+                MenuButton.Margin = new Thickness(275, 10, 0, 0);
+                MusicControlsGrid.Width = 315;
+                VolumeSlider.Orientation = Orientation.Vertical;
+            }
+            else
+            {
+                CPLabel.Visibility = Visibility.Visible;
+                CPGrid.Width = 285;
+                PositionSlider.Width = 400;
+                PositionSlider.HorizontalAlignment = HorizontalAlignment.Center;
+            }
+
+            if (Height < 500)
+            {
+                SongsListBox.SetValue(Grid.RowSpanProperty, 2);
+                PositionLabel.Visibility = Visibility.Collapsed;
+                ControlsGrid.Margin = new Thickness(0, 0, 0, -40);
+                VolumeIcon.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                SongsListBox.SetValue(Grid.RowSpanProperty, 1);
+                PositionLabel.Visibility = Visibility.Visible;
+                ControlsGrid.Margin = new Thickness(0, 0, 0, 0);
+                VolumeIcon.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void MenuButton_Click(object sender, EventArgs e)
+        {
+            ToolBar.Visibility = Visibility.Visible;
         }
 
         class Error : Exception

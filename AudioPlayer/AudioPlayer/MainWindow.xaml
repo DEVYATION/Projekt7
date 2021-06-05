@@ -4,32 +4,51 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Audio Player" Height="625" MinHeight="625" Width="800" MinWidth="800" Background="#FF323232" Icon="Images/mainIcon.png" Closing="MainWindow_Closing" SizeChanged="Window_SizeChanged" StateChanged="Window_StateChanged">
-    <Grid>
-        <Label Content="Audio Player" HorizontalAlignment="Left" Margin="30,30,0,0" VerticalAlignment="Top" Height="50" Width="190" FontSize="30" Foreground="White"/>
-        <ListBox x:Name="SongsListBox" HorizontalAlignment="Left" Height="300" Margin="30,85,0,0" VerticalAlignment="Top" Width="720" FontSize="10" MouseDoubleClick="SongsListBox_MouseDoubleClick" Background="#FF646464" Foreground="White"/>
-        <Grid HorizontalAlignment="Right" Height="46" Margin="0,34,44,0" VerticalAlignment="Top" Width="285">
-            <Label Content="Current Playlist" HorizontalAlignment="Left" Margin="105,0,0,0" VerticalAlignment="Top" FontSize="24" Width="180" Height="46" Foreground="White" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom"/>
+        Title="Audio Player" Height="625" MinHeight="450" Width="800" MinWidth="400" Background="#FF323232" Icon="Images/mainIcon.png" Closing="MainWindow_Closing" SizeChanged="Window_SizeChanged">
+    <Grid x:Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="43"/>
+            <ColumnDefinition Width="42"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="85"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="169" x:Name="BottomControlsGridRow"/>
+        </Grid.RowDefinitions>
+        <Label Content="Audio Player" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Height="50" Width="190" FontSize="30" Foreground="White" Grid.Column="1"/>
+        <ListBox x:Name="SongsListBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MouseDoubleClick="SongsListBox_MouseDoubleClick" Background="#FF646464" Foreground="White" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <Grid x:Name="CPGrid" HorizontalAlignment="Right" Height="46" Margin="0,34,2,0" VerticalAlignment="Top" Width="285" Grid.Column="1" Grid.ColumnSpan="2">
+            <Label x:Name="CPLabel" Content="Current Playlist" HorizontalAlignment="Left" Margin="105,0,0,0" VerticalAlignment="Top" FontSize="24" Width="180" Height="46" Foreground="White" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom"/>
             <Button x:Name="SavePlaylistButton" Content="💾" HorizontalAlignment="Left" Margin="70,10,0,0" VerticalAlignment="Top" Width="30" Height="30" Foreground="White" Background="#FF646464" Click="SavePlaylistButton_Click" FontSize="18"/>
             <Button x:Name="ClearButton" Content="✖" HorizontalAlignment="Left" Margin="35,10,0,0" VerticalAlignment="Top" Width="30" Background="#FF646464" Foreground="White" Height="30" Click="ClearButton_Click" FontSize="18"/>
             <Button x:Name="AddSongsButton" Content="➕" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="30" Height="30" Click="AddSongsButton_Click" Foreground="White" Background="#FF646464" FontSize="18"/>
         </Grid>
-        <Grid x:Name="ControlsGrid" HorizontalAlignment="Left" Height="170" Margin="30,0,0,34" VerticalAlignment="Bottom" Width="720">
-            <Grid HorizontalAlignment="Center" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="316">
-                <Button x:Name="PlayPauseButton" Content="⏯" HorizontalAlignment="Left" Margin="110,0,0,0" VerticalAlignment="Top" Width="50" Height="50" FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="PlayPauseButton_Click" Background="#FF12B900" Foreground="White"/>
-                <Button x:Name="PrevButton" Content="⏮" HorizontalAlignment="Left" Margin="55,0,0,0" VerticalAlignment="Top" Width="50" Height="50" FontSize="30" Click="PrevButton_Click" Background="#FF1E1A70" Foreground="White"/>
-                <Button x:Name="NextButton" Content="⏭" HorizontalAlignment="Left" Margin="165,0,0,0" VerticalAlignment="Top" Width="50" Height="50" FontSize="30" Click="NextButton_Click" Background="#FF1E1A70" Foreground="White"/>
-                <Button x:Name="RepeatButton" Content="🔁️" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="50" FontSize="30" TextOptions.TextHintingMode="Fixed" Click="RepeatButton_Click" Background="#FF9C9C9C" Foreground="White"/>
-                <Button x:Name="ShuffleButton" Content="🔀️" HorizontalAlignment="Left" Margin="220,0,0,0" VerticalAlignment="Top" Width="50" Height="50" Foreground="White" Background="#FF9C9C9C" FontSize="30" Click="ShuffleButton_Click"/>
-                <Button x:Name="MiniPlayerButton" Content="📱" HorizontalAlignment="Left" Margin="275,10,0,0" VerticalAlignment="Top" Width="40" Foreground="White" Background="#FF646464" Height="40" Click="MiniPlayerButton_Click" FontSize="18"/>
+        <Grid x:Name="ControlsGrid" HorizontalAlignment="Stretch" Height="170" VerticalAlignment="Bottom" Grid.Row="3" Grid.Column="1" Margin="0,0,0,-1">
+            <Grid x:Name="MusicControlsGrid" HorizontalAlignment="Center" Height="50" Margin="0,0,0,110" VerticalAlignment="Bottom" Width="315">
+                <Button x:Name="PlayPauseButton" Content="⏯" HorizontalAlignment="Left" Margin="110,0,0,0" VerticalAlignment="Bottom" Width="50" Height="50" FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="PlayPauseButton_Click" Background="#FF12B900" Foreground="White"/>
+                <Button x:Name="PrevButton" Content="⏮" HorizontalAlignment="Left" Margin="55,0,0,0" VerticalAlignment="Bottom" Width="50" Height="50" FontSize="30" Click="PrevButton_Click" Background="#FF1E1A70" Foreground="White"/>
+                <Button x:Name="NextButton" Content="⏭" HorizontalAlignment="Left" Margin="165,0,0,0" VerticalAlignment="Bottom" Width="50" Height="50" FontSize="30" Click="NextButton_Click" Background="#FF1E1A70" Foreground="White"/>
+                <Button x:Name="RepeatButton" Content="🔁️" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="50" Height="50" FontSize="30" TextOptions.TextHintingMode="Fixed" Click="RepeatButton_Click" Background="#FF9C9C9C" Foreground="White"/>
+                <Button x:Name="ShuffleButton" Content="🔀️" HorizontalAlignment="Left" Margin="220,0,0,0" VerticalAlignment="Bottom" Width="50" Height="50" Foreground="White" Background="#FF9C9C9C" FontSize="30" Click="ShuffleButton_Click"/>
+                <Button x:Name="MiniPlayerButton" Content="📱" HorizontalAlignment="Left" Margin="275,10,0,0" VerticalAlignment="Bottom" Width="40" Foreground="White" Background="#FF646464" Height="40" Click="MiniPlayerButton_Click" FontSize="18"/>
+                <Button x:Name="MenuButton" Content="..." FontSize="18" Foreground="White" Background="#FF646464" HorizontalAlignment="Left" Margin="276,10,0,0" VerticalAlignment="Bottom" Width="40" Height="40" Visibility="Hidden" Click="MenuButton_Click"/>
             </Grid>
-            <Slider x:Name="PositionSlider" Thumb.DragStarted="PositionSlider_DragStarted" Thumb.DragCompleted="PositionSlider_DragCompleted" HorizontalAlignment="Center" Margin="0,85,0,0" Height="20" Width="400" Maximum="1" TickPlacement="BottomRight" LargeChange="0" Foreground="Black" Background="#FF212121" BorderBrush="White" IsTabStop="False" ValueChanged="PositionSlider_ValueChanged" IsEnabled="False" SmallChange="0" VerticalAlignment="Top"/>
+            <ToolBar x:Name="ToolBar" HorizontalAlignment="Left" Height="50" Margin="10,0,0,55" VerticalAlignment="Bottom" Width="250" Foreground="White" Background="#FF444444" Visibility="Hidden">
+                <Button x:Name="RepeatButtonMenu" Content="🔁️" Width="50" Height="50" Foreground="White" Click="RepeatButton_Click" Background="#FF9C9C9C" FontSize="30"/>
+                <Button x:Name="ShuffleButtonMenu" Content="🔀️" Width="50" Height="50" Foreground="White" Click="ShuffleButton_Click" Background="#FF9C9C9C" FontSize="30"/>
+                <Button x:Name="MiniPlayerButtonMenu" Content="📱" Width="40" Height="40" Foreground="White" Click="MiniPlayerButton_Click" Background="#FF646464" FontSize="18"/>
+                <Slider x:Name="VolumeSliderMenu" Thumb.DragDelta="VolumeSlider_DragDelta" Width="82" Orientation="Horizontal" Height="20" Value="0.5" Maximum="1" TickPlacement="BottomRight" LargeChange="0" SmallChange="0" Foreground="Black" Background="#FF212121" BorderBrush="White" IsTabStop="False"/>
+            </ToolBar>
+            <Slider x:Name="PositionSlider" Thumb.DragStarted="PositionSlider_DragStarted" Thumb.DragCompleted="PositionSlider_DragCompleted" HorizontalAlignment="Center" Margin="0,85,0,0" Height="20" Maximum="1" TickPlacement="BottomRight" LargeChange="0" Foreground="Black" Background="#FF212121" BorderBrush="White" IsTabStop="False" ValueChanged="PositionSlider_ValueChanged" IsEnabled="False" SmallChange="0" VerticalAlignment="Top"/>
             <Label x:Name="PositionLabel" Content="00:00/00:00" HorizontalAlignment="Center" Margin="0,110,0,0" VerticalAlignment="Top" Height="45" Width="140" FontSize="20" Foreground="White" HorizontalContentAlignment="Center"/>
-            <Grid HorizontalAlignment="Right" Height="145" Margin="0,10,0,0" VerticalAlignment="Top" Width="43">
-                <Label Content="🔊" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Foreground="White"/>
-                <Slider x:Name="VolumeSlider" Thumb.DragDelta="VolumeSlider_DragDelta" HorizontalAlignment="Center" Margin="0,47,0,0" VerticalAlignment="Top" Width="20" Orientation="Vertical" Height="72" Value="0.5" Maximum="1" TickPlacement="BottomRight" LargeChange="0" SmallChange="0" Foreground="Black" Background="#FF212121" BorderBrush="White" IsTabStop="False"/>
-                <Label x:Name="VolumeLabel" Content="50%" HorizontalAlignment="Left" Margin="0,119,0,0" VerticalAlignment="Top" Foreground="White" Width="43" HorizontalContentAlignment="Center"/>
-            </Grid>
+        </Grid>
+        <Grid x:Name="VolumeControlGrid" HorizontalAlignment="Right" Height="169" VerticalAlignment="Top" Width="43" Grid.Column="2" Grid.Row="3">
+            <Label x:Name="VolumeIcon" Content="🔊" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Foreground="White"/>
+            <Slider x:Name="VolumeSlider" Thumb.DragDelta="VolumeSlider_DragDelta" HorizontalAlignment="Center" Margin="12,47,11,0" VerticalAlignment="Top" Width="20" Orientation="Vertical" Height="82" Value="0.5" Maximum="1" TickPlacement="BottomRight" LargeChange="0" SmallChange="0" Foreground="Black" Background="#FF212121" BorderBrush="White" IsTabStop="False"/>
+            <Label x:Name="VolumeLabel" Content="50%" HorizontalAlignment="Left" Margin="0,129,0,0" VerticalAlignment="Top" Foreground="White" Width="43" HorizontalContentAlignment="Center"/>
         </Grid>
     </Grid>
 </Window>
