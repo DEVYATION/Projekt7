@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -19,75 +21,6 @@ namespace AudioPlayer
         public readonly Random r = new Random();
         public int positionSliderIsMoving = 0, isPlaying = 0, playing = -1, repeatType = 0, shuffle = 0, shuffleSelection = 0, shuffleFound = 0, saveSuccess = 0;
 
-        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (Width < 500)
-            {
-                CPLabel.Visibility = Visibility.Collapsed;
-                CPGrid.Width = 100;
-                PositionSlider.Width = double.NaN;
-                PositionSlider.HorizontalAlignment = HorizontalAlignment.Stretch;
-                ShuffleButton.Visibility = Visibility.Collapsed;
-                RepeatButton.Visibility = Visibility.Collapsed;
-                MiniPlayerButton.Visibility = Visibility.Collapsed;
-                VolumeControlGrid.Visibility = Visibility.Collapsed;
-                MenuButton.Visibility = Visibility.Visible;
-                ControlsGrid.SetValue(Grid.ColumnSpanProperty, 2);
-                PrevButton.Margin = new Thickness(0, 0, 0, 0);
-                PlayPauseButton.Margin = new Thickness(55, 0, 0, 0);
-                NextButton.Margin = new Thickness(110, 0, 0, 0);
-                MenuButton.Margin = new Thickness(165, 10, 0, 0);
-                MusicControlsGrid.Width = 205;
-                VolumeSlider.Orientation = Orientation.Horizontal;
-            }
-            else if (Width >= 500 && Width < 600)
-            {
-                CPLabel.Visibility = Visibility.Collapsed;
-                CPGrid.Width = 100;
-                PositionSlider.Width = double.NaN;
-                PositionSlider.HorizontalAlignment = HorizontalAlignment.Stretch;
-                ShuffleButton.Visibility = Visibility.Visible;
-                RepeatButton.Visibility = Visibility.Visible;
-                MiniPlayerButton.Visibility = Visibility.Visible;
-                VolumeControlGrid.Visibility = Visibility.Visible;
-                MenuButton.Visibility = Visibility.Hidden;
-                ControlsGrid.SetValue(Grid.ColumnSpanProperty, 1);
-                PrevButton.Margin = new Thickness(55, 0, 0, 0);
-                PlayPauseButton.Margin = new Thickness(110, 0, 0, 0);
-                NextButton.Margin = new Thickness(165, 0, 0, 0);
-                MenuButton.Margin = new Thickness(275, 10, 0, 0);
-                MusicControlsGrid.Width = 315;
-                VolumeSlider.Orientation = Orientation.Vertical;
-            }
-            else
-            {
-                CPLabel.Visibility = Visibility.Visible;
-                CPGrid.Width = 285;
-                PositionSlider.Width = 400;
-                PositionSlider.HorizontalAlignment = HorizontalAlignment.Center;
-            }
-
-            if (Height < 500)
-            {
-                SongsListBox.SetValue(Grid.RowSpanProperty, 2);
-                PositionLabel.Visibility = Visibility.Collapsed;
-                ControlsGrid.Margin = new Thickness(0, 0, 0, -40);
-                VolumeIcon.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                SongsListBox.SetValue(Grid.RowSpanProperty, 1);
-                PositionLabel.Visibility = Visibility.Visible;
-                ControlsGrid.Margin = new Thickness(0, 0, 0, 0);
-                VolumeIcon.Visibility = Visibility.Visible;
-            }
-        }
-
-        private void MenuButton_Click(object sender, EventArgs e)
-        {
-            ToolBar.Visibility = Visibility.Visible;
-        }
-
         class Error : Exception
         {
             public Error()
@@ -99,6 +32,7 @@ namespace AudioPlayer
         public MainWindow()
         {
             InitializeComponent();
+
             try
             {
                 sr = new StreamReader("./autoconfig_do_not_delete_or_modify.txt");
@@ -108,6 +42,7 @@ namespace AudioPlayer
                     throw new Error();
                 }
                 VolumeSlider.Value = Convert.ToDouble(sr.ReadLine());
+                VolumeSliderMenu.Value = VolumeSlider.Value;
                 VolumeLabel.Content = Math.Round(VolumeSlider.Value * 100) + "%";
                 mediaPlayer.Volume = VolumeSlider.Value;
                 int fileRepeat = Convert.ToInt32(sr.ReadLine());
@@ -115,18 +50,34 @@ namespace AudioPlayer
                 {
                     repeatType = 1;
                     RepeatButton.Background = (Brush)new BrushConverter().ConvertFrom("#FF6BA1FF");
+                    RepeatButton.ToolTip = "Repeat all";
+                    RepeatButtonMenu.ToolTip = "Repeat all";
                 }
                 else if (fileRepeat == 2)
                 {
                     repeatType = 2;
                     RepeatButton.Content = "🔂";
                     RepeatButton.Background = (Brush)new BrushConverter().ConvertFrom("#FF6BA1FF");
+                    RepeatButton.ToolTip = "Repeat one song";
+                    RepeatButtonMenu.ToolTip = "Repeat one song";
+                }
+                else
+                {
+                    RepeatButton.ToolTip = "No repeat";
+                    RepeatButtonMenu.ToolTip = "No repeat";
                 }
                 int fileShuffle = Convert.ToInt32(sr.ReadLine());
                 if (fileShuffle == 1)
                 {
                     shuffle = 1;
                     ShuffleButton.Background = (Brush)new BrushConverter().ConvertFrom("#FF6BA1FF");
+                    ShuffleButton.ToolTip = "Random shuffle";
+                    ShuffleButtonMenu.ToolTip = "Random shuffle";
+                }
+                else
+                {
+                    ShuffleButton.ToolTip = "No shuffle";
+                    ShuffleButtonMenu.ToolTip = "No shuffle";
                 }
                 int fileSelectedIndex = Convert.ToInt32(sr.ReadLine());
                 while (!sr.EndOfStream)
@@ -147,6 +98,18 @@ namespace AudioPlayer
             }
             mediaPlayer.MediaEnded += new EventHandler(Media_Ended);
             Closing += new CancelEventHandler(MainWindow_Closing);
+
+            AddSongsButton.ToolTip = "Add new songs to the current playlist";
+            ClearButton.ToolTip = "Clear the current playlist";
+            SavePlaylistButton.ToolTip = "Save the current playlist";
+            PrevButton.ToolTip = "Previous song";
+            PlayPauseButton.ToolTip = "Play";
+            NextButton.ToolTip = "Next song";
+            MiniPlayerButton.ToolTip = "Go to miniplayer mode";
+            MenuButton.ToolTip = "Show more controls";
+            MiniPlayerButtonMenu.ToolTip = "Go to miniplayer mode";
+            VolumeSlider.ToolTip = "Volume (" + mediaPlayer.Volume + "%)";
+            VolumeSliderMenu.ToolTip = "Volume (" + mediaPlayer.Volume + "%)";
         }
 
         private void MainWindow_Closing(object sender, CancelEventArgs e)

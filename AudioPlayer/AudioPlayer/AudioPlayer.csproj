@@ -78,6 +78,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Code\MiniPlayerButton.cs" />
+    <Compile Include="Code\ResponsivenessMenus.cs" />
     <Compile Include="Code\Sel1stIndStAgNxtRanS.cs" />
     <Compile Include="Code\2ClicAddRemClear.cs" />
     <Compile Include="Code\RepShufPosVolBal.cs" />
